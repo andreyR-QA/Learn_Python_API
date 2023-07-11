@@ -1,8 +1,14 @@
+import allure
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 
+@allure.epic("Get user details cases")
 class TestUserGet(BaseCase):
+    @allure.title("Get user details without authorisation")
+    @allure.description("This test checks response user attributes without authorisation")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_get.py",
+                 name="<--Click to view code on GitHub")
     def test_get_user_details_if_not_auth(self):
         response = MyRequests.get("/user/2")
 
@@ -11,6 +17,10 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_not_key(response, "firstName")
         Assertions.assert_json_has_not_key(response, "lastName")
 
+    @allure.title("Get user details with authorisation")
+    @allure.description("This test checks authorised user attributes")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_get.py",
+                 name="<--Click to view code on GitHub")
     def test_get_user_details_as_same_user(self):
         data = {
             'email': 'vinkotov@example.com',
@@ -33,6 +43,10 @@ class TestUserGet(BaseCase):
 
     #  ---- Ex16: Запрос данных другого пользователя ----
     # Запрос данных пользователя с данными другого
+    @allure.title("Get user details with wrong authorisation parameters")
+    @allure.description("This test checks user attributes making request with another user authorisation parameters")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_get.py",
+                 name="<--Click to view code on GitHub")
     def test_get_user_data_without_auth(self):
         data = {
             'email': 'vinkotov@example.com',

@@ -22,6 +22,8 @@ class TestUserAuth(BaseCase):
 
     @allure.title('Successful authorisation')
     @allure.description("This test successfully authorise user by email and password")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_auth.py",
+                 name="<--Click to view code on GitHub")
     def test_auth_user(self):
 
         response2 = MyRequests.get(
@@ -38,6 +40,8 @@ class TestUserAuth(BaseCase):
 
     @allure.title('Negative authorisation test')
     @allure.description("This test checks authorisation status w/o sending auth cookie or token")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_auth.py",
+                 name="<--Click to view code on GitHub")
     @pytest.mark.parametrize('condition', exclude_params)
     def test_negative_auth_test(self, condition):
         data = {

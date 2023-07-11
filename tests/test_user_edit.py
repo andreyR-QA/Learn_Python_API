@@ -1,8 +1,15 @@
+import allure
+
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 
+@allure.epic("EDIT user cases")
 class TestUserEdit(BaseCase):
+    @allure.title("Changing user's name")
+    @allure.description("This test creates new user, changes user's name and checks result")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_edit.py",
+                 name="<--Click to view code on GitHub")
     def test_edit_just_created_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()

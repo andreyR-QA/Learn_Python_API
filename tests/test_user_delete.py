@@ -1,10 +1,16 @@
 # --- Ex18: Тесты на DELETE ----
+import allure
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 import time
 
+@allure.epic("DELETE user cases")
 class TestUserDelete(BaseCase):
+    @allure.title("Deleting user without authorisation")
+    @allure.description("This test tries to delete user with id=2  without authorisation")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_delete.py",
+                 name="<--Click to view code on GitHub")
     def test_delete_user_2_without_auth(self):                      # тест на удаление без авторизации
         data = {
             'email': 'vinkotov@example.com',
@@ -14,6 +20,10 @@ class TestUserDelete(BaseCase):
 
         Assertions.assert_code_status(response, 400)
 
+    @allure.title("Deleting authorised user")
+    @allure.description("This test creates and deletes this user using credentials")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_delete.py",
+                 name="<--Click to view code on GitHub")
     def test_delete_authorised_user(self):                          # тест на удаление созданного пользователя
         data = self.prepare_registration_data()
 
@@ -42,6 +52,10 @@ class TestUserDelete(BaseCase):
         Assertions.assert_code_status(response4, 404)                           # проверяем что пользователь не найден
         Assertions.assert_response_match_content(response4, "User not found")
 
+    @allure.title("Deleting user with another user credentials")
+    @allure.description("This test creates 2 users and deletes one of them using another's credentials")
+    @allure.link("https://github.com/andreyR-QA/Learn_Python_API/blob/main/tests/test_user_delete.py",
+                 name="<--Click to view code on GitHub")
     def test_delete_another_authorised_user(self):                          # тест на удаление с авторизацией другого поьзователя
         data_first = self.prepare_registration_data()
 
